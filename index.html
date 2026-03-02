@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q-Bit Corporation</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #ffffff;
+            --black: #1d1d1f;
+            --gray-50: #fbfbfd;
+            --gray-100: #f5f5f7;
+            --gray-200: #e8e8ed;
+            --gray-400: #86868b;
+            --gray-600: #6e6e73;
+            --gray-800: #424245;
+            --blue: #0071e3;
+            --blue-hover: #0077ED;
+            --gradient-start: #1d1d1f;
+            --gradient-end: #424245;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Noto Sans KR', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--black);
+            background: var(--white);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Navigation                              */
+        /* ═══════════════════════════════════════ */
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 0.5px solid var(--gray-200);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-content {
+            width: 100%;
+            max-width: 1024px;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 21px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--gray-600);
+            text-decoration: none;
+            letter-spacing: 0.01em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--black);
+        }
+
+        .lang-toggle {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--blue);
+            background: none;
+            border: 1px solid var(--blue);
+            border-radius: 980px;
+            padding: 4px 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.01em;
+        }
+
+        .lang-toggle:hover {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Hero Section                            */
+        /* ═══════════════════════════════════════ */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: var(--white);
+            position: relative;
+        }
+
+        .hero-motto {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.2s forwards;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+            color: var(--black);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.4s forwards;
+        }
+
+        .hero-sub {
+            font-size: clamp(18px, 2.5vw, 24px);
+            font-weight: 300;
+            color: var(--gray-600);
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 48px;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.6s forwards;
+        }
+
+        .hero-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            opacity: 0.04;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 17px;
+            font-weight: 400;
+            color: var(--blue);
+            text-decoration: none;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.8s forwards;
+            transition: gap 0.3s;
+        }
+
+        .hero-cta:hover {
+            gap: 12px;
+        }
+
+        .hero-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Bit-Wave Animation                      */
+        /* ═══════════════════════════════════════ */
+
+        .bitwave-section {
+            padding: 120px 24px;
+            background: var(--black);
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bitwave-canvas {
+            width: 100%;
+            max-width: 800px;
+            height: 200px;
+            margin: 0 auto 60px;
+            position: relative;
+        }
+
+        .bitwave-section h2 {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        .bitwave-section p {
+            font-size: 17px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.56);
+            max-width: 540px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* About Section                           */
+        /* ═══════════════════════════════════════ */
+
+        .about {
+            padding: 140px 24px;
+            background: var(--gray-50);
+        }
+
+        .about-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 16px;
+        }
+
+        .about h2 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--black);
+            margin-bottom: 40px;
+        }
+
+        .about-text {
+            font-size: 19px;
+            font-weight: 300;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .about-text strong {
+            color: var(--black);
+            font-weight: 500;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Pillars Section                         */
+        /* ═══════════════════════════════════════ */
+
+        .pillars {
+            padding: 120px 24px;
+            background: var(--white);
+        }
+
+        .pillars-grid {
+            max-width: 980px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .pillar-card {
+            background: var(--gray-50);
+            border-radius: 20px;
+            padding: 48px 36px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .pillar-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .pillar-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .pillar-card p {
+            font-size: 15px;
+            font-weight: 300;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Team Section                            */
+        /* ═══════════════════════════════════════ */
+
+        .team {
+            padding: 140px 24px;
+            background: var(--gray-50);
+        }
+
+        .team-content {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .team h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 56px;
+        }
+
+        .founder-card {
+            text-align: left;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 56px 48px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .founder-name {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: 4px;
+        }
+
+        .founder-title {
+            font-size: 17px;
+            font-weight: 400;
+            color: var(--blue);
+            margin-bottom: 32px;
+        }
+
+        .founder-bio {
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .founder-credentials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 32px;
+        }
+
+        .credential-tag {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--gray-600);
+            background: var(--gray-100);
+            border-radius: 980px;
+            padding: 6px 16px;
+            letter-spacing: 0.01em;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Partners Section                        */
+        /* ═══════════════════════════════════════ */
+
+        .partners {
+            padding: 100px 24px;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .partners h3 {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 40px;
+        }
+
+        .partner-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 56px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .partner-logo {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gray-400);
+            letter-spacing: -0.01em;
+            transition: color 0.3s;
+        }
+
+        .partner-logo:hover {
+            color: var(--gray-800);
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Contact Section                         */
+        /* ═══════════════════════════════════════ */
+
+        .contact {
+            padding: 140px 24px;
+            background: var(--gray-50);
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .contact-sub {
+            font-size: 19px;
+            font-weight: 300;
+            color: var(--gray-600);
+            margin-bottom: 48px;
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-size: 17px;
+            font-weight: 400;
+            color: var(--white);
+            background: var(--blue);
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 980px;
+            transition: background 0.3s;
+        }
+
+        .contact-email:hover {
+            background: var(--blue-hover);
+        }
+
+        .contact-details {
+            margin-top: 56px;
+            display: flex;
+            justify-content: center;
+            gap: 64px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            margin-bottom: 8px;
+        }
+
+        .contact-item-value {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--gray-800);
+            line-height: 1.5;
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Footer                                  */
+        /* ═══════════════════════════════════════ */
+
+        footer {
+            padding: 20px 24px;
+            background: var(--gray-100);
+            text-align: center;
+            border-top: 0.5px solid var(--gray-200);
+        }
+
+        footer p {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--gray-400);
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Animations                              */
+        /* ═══════════════════════════════════════ */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════════════════════ */
+        /* Responsive                              */
+        /* ═══════════════════════════════════════ */
+
+        @media (max-width: 768px) {
+            .pillars-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .nav-links a.nav-text {
+                display: none;
+            }
+
+            .founder-card {
+                padding: 36px 28px;
+            }
+
+            .contact-details {
+                gap: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .partner-logos {
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="nav-logo">Q-Bit<span> Corp.</span></a>
+            <div class="nav-links">
+                <a href="#about" class="nav-text" data-en="About" data-ko="소개">About</a>
+                <a href="#team" class="nav-text" data-en="Team" data-ko="팀">Team</a>
+                <a href="#contact" class="nav-text" data-en="Contact" data-ko="문의">Contact</a>
+                <button class="lang-toggle" onclick="toggleLang()">한국어</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <p class="hero-motto">Bit to Wave · Wave to Bit</p>
+        <h1 data-en="Where Meaning<br>Emerges" data-ko="의미가<br>창발하는 곳">Where Meaning<br>Emerges</h1>
+        <p class="hero-sub" data-en="We build the bridge between discrete information and continuous understanding — transforming how machines and humans think together." data-ko="이산 정보와 연속적 이해 사이의 다리를 만듭니다 — 기계와 인간이 함께 사고하는 방식을 바꿉니다.">We build the bridge between discrete information and continuous understanding — transforming how machines and humans think together.</p>
+        <a href="#about" class="hero-cta" data-en="Learn more" data-ko="더 알아보기">
+            <span>Learn more</span>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 10h8M11 7l3 3-3 3"/>
+            </svg>
+        </a>
+
+        <!-- Subtle wave SVG -->
+        <svg class="hero-wave" viewBox="0 0 1440 200" preserveAspectRatio="none">
+            <path d="M0,100 C360,20 720,180 1080,80 C1260,30 1380,100 1440,100 L1440,200 L0,200 Z" fill="currentColor"/>
+        </svg>
+    </section>
+
+    <!-- Bit to Wave Visual -->
+    <section class="bitwave-section">
+        <div class="bitwave-canvas">
+            <canvas id="waveCanvas" width="800" height="200"></canvas>
+        </div>
+        <h2 data-en="f(Human, AI, Knowledge)<br>= New Meaning" data-ko="f(사람, AI, 지식)<br>= 새로운 의미">f(Human, AI, Knowledge)<br>= New Meaning</h2>
+        <p data-en="Data becomes waves. Waves interfere. Interference creates meaning that neither human nor machine could find alone." data-ko="데이터가 파동이 됩니다. 파동이 간섭합니다. 간섭이 사람도 기계도 혼자서는 찾지 못할 의미를 만듭니다.">Data becomes waves. Waves interfere. Interference creates meaning that neither human nor machine could find alone.</p>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-content reveal">
+            <p class="section-label" data-en="About Q-Bit" data-ko="Q-Bit 소개">About Q-Bit</p>
+            <h2 data-en="Cognitive Augmentation<br>for Complex Systems" data-ko="복잡계를 위한<br>인지능 증강">Cognitive Augmentation<br>for Complex Systems</h2>
+            <p class="about-text" data-en="Q-Bit Corporation engineers the mathematical infrastructure that transforms how organizations understand their own knowledge. Our core technology — the <strong>Geodesic Local Knowledge Engine (GLKE)</strong> — applies density matrix formalism and differential geometry to preserve the interference structures that conventional AI destroys." data-ko="Q-Bit Corporation은 조직이 자신의 지식을 이해하는 방식을 바꾸는 수학적 인프라를 만듭니다. 핵심 기술인 <strong>Geodesic Local Knowledge Engine (GLKE)</strong>은 밀도행렬 형식론과 미분기하학을 적용하여 기존 AI가 파괴하는 간섭 구조를 보존합니다.">Q-Bit Corporation engineers the mathematical infrastructure that transforms how organizations understand their own knowledge. Our core technology — the <strong>Geodesic Local Knowledge Engine (GLKE)</strong> — applies density matrix formalism and differential geometry to preserve the interference structures that conventional AI destroys.</p>
+            <p class="about-text" data-en="Built on <strong>Phase Biology</strong> — a unified framework connecting biological emergence, AI inference, and data analysis through wave-like interference in density matrices — our platform operates entirely on-premise, with zero data exposure, zero API costs, and zero cloud dependency." data-ko="<strong>Phase Biology</strong> — 생물학적 창발, AI 추론, 데이터 분석을 밀도행렬의 파동적 간섭으로 연결하는 통합 프레임워크 — 를 기반으로, 데이터 유출 제로, API 비용 제로, 클라우드 의존 제로의 완전한 온프레미스 플랫폼을 제공합니다.">Built on <strong>Phase Biology</strong> — a unified framework connecting biological emergence, AI inference, and data analysis through wave-like interference in density matrices — our platform operates entirely on-premise, with zero data exposure, zero API costs, and zero cloud dependency.</p>
+        </div>
+    </section>
+
+    <!-- Pillars -->
+    <section class="pillars">
+        <div class="pillars-grid">
+            <div class="pillar-card reveal">
+                <div class="pillar-icon">ρ</div>
+                <h3 data-en="Density Matrix Analysis" data-ko="밀도행렬 분석">Density Matrix Analysis</h3>
+                <p data-en="Preserve off-diagonal interference terms that cosine similarity discards. See the hidden connections between your data." data-ko="코사인 유사도가 버리는 비대각 간섭항을 보존합니다. 데이터 사이의 숨겨진 연결을 봅니다.">Preserve off-diagonal interference terms that cosine similarity discards. See the hidden connections between your data.</p>
+            </div>
+            <div class="pillar-card reveal">
+                <div class="pillar-icon">κ</div>
+                <h3 data-en="Geodesic Inference" data-ko="측지선 추론">Geodesic Inference</h3>
+                <p data-en="Navigate curved meaning spaces along optimal paths. Christoffel symbols guide retrieval through the natural geometry of knowledge." data-ko="곡률 의미 공간에서 최적 경로를 따라 이동합니다. 크리스토펠 기호가 지식의 자연 기하학을 통해 검색을 안내합니다.">Navigate curved meaning spaces along optimal paths. Christoffel symbols guide retrieval through the natural geometry of knowledge.</p>
+            </div>
+            <div class="pillar-card reveal">
+                <div class="pillar-icon">λ</div>
+                <h3 data-en="On-Premise Intelligence" data-ko="온프레미스 인텔리전스">On-Premise Intelligence</h3>
+                <p data-en="Runs on Apple Silicon. Your data never leaves your office. Enterprise-grade knowledge analysis at the cost of a single workstation." data-ko="Apple Silicon에서 구동됩니다. 데이터가 사무실을 떠나지 않습니다. 워크스테이션 한 대의 비용으로 기업급 지식 분석을 제공합니다.">Runs on Apple Silicon. Your data never leaves your office. Enterprise-grade knowledge analysis at the cost of a single workstation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team" id="team">
+        <div class="team-content">
+            <p class="section-label reveal" data-en="Leadership" data-ko="리더십">Leadership</p>
+            <h2 class="reveal" data-en="Founded by Science" data-ko="과학으로 세운 회사">Founded by Science</h2>
+            <div class="founder-card reveal">
+                <p class="founder-name" data-en="Dogeun Kim, DVM, PhD" data-ko="김도근 (DVM, PhD)">Dogeun Kim, DVM, PhD</p>
+                <p class="founder-title" data-en="Founder & CEO" data-ko="설립자 & CEO">Founder & CEO</p>
+                <p class="founder-bio" data-en="Principal Researcher at Korea Brain Research Institute (KBRI) with a PhD from Cornell University in immunology. Over a decade of blood-brain barrier research, combining deep expertise in neuroscience with mathematical modeling and AI systems architecture." data-ko="코넬대학교 면역학 박사, 한국뇌연구원 책임연구원. 10년 이상의 혈뇌장벽 연구 경험을 바탕으로 신경과학, 수학적 모델링, AI 시스템 아키텍처를 결합합니다.">Principal Researcher at Korea Brain Research Institute (KBRI) with a PhD from Cornell University in immunology. Over a decade of blood-brain barrier research, combining deep expertise in neuroscience with mathematical modeling and AI systems architecture.</p>
+                <p class="founder-bio" data-en="His interdisciplinary approach — connecting immunology, differential geometry, and complex systems theory — led to the development of Phase Biology and the mathematical foundations underlying Q-Bit's technology platform." data-ko="면역학, 미분기하학, 복잡계 이론을 연결하는 학제간 접근을 통해 Phase Biology와 Q-Bit 기술 플랫폼의 수학적 기반을 개발했습니다.">His interdisciplinary approach — connecting immunology, differential geometry, and complex systems theory — led to the development of Phase Biology and the mathematical foundations underlying Q-Bit's technology platform.</p>
+                <div class="founder-credentials">
+                    <span class="credential-tag" data-en="Cornell PhD" data-ko="코넬대 박사">Cornell PhD</span>
+                    <span class="credential-tag">KBRI</span>
+                    <span class="credential-tag" data-en="BBB Research" data-ko="혈뇌장벽 연구">BBB Research</span>
+                    <span class="credential-tag">DPUK · Oxford</span>
+                    <span class="credential-tag">Fraunhofer SCAI</span>
+                    <span class="credential-tag">Phase Biology</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners reveal">
+        <h3 data-en="Research Partners" data-ko="연구 파트너">Research Partners</h3>
+        <div class="partner-logos">
+            <span class="partner-logo">KBRI</span>
+            <span class="partner-logo">Cornell University</span>
+            <span class="partner-logo">DPUK · Oxford</span>
+            <span class="partner-logo">Fraunhofer SCAI</span>
+            <span class="partner-logo">ABL Bio</span>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="reveal">
+            <p class="section-label" data-en="Get in Touch" data-ko="연락하기">Get in Touch</p>
+            <h2 data-en="Let's Build<br>Something Meaningful" data-ko="의미 있는 것을<br>함께 만들어봅시다">Let's Build<br>Something Meaningful</h2>
+            <p class="contact-sub" data-en="Partnership inquiries, research collaboration, or investment discussions." data-ko="파트너십 문의, 연구 협력, 투자 관련 논의를 환영합니다.">Partnership inquiries, research collaboration, or investment discussions.</p>
+            <a href="mailto:contact@q-bit.co" class="contact-email" data-en="contact@q-bit.co" data-ko="contact@q-bit.co">contact@q-bit.co</a>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <p class="contact-item-label" data-en="Headquarters" data-ko="본사">Headquarters</p>
+                    <p class="contact-item-value" data-en="Daegu, South Korea" data-ko="대한민국 대구">Daegu, South Korea</p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-item-label" data-en="Affiliation" data-ko="연계 기관">Affiliation</p>
+                    <p class="contact-item-value" data-en="Korea Brain Research Institute" data-ko="한국뇌연구원">Korea Brain Research Institute</p>
+                </div>
+                <div class="contact-item">
+                    <p class="contact-item-label" data-en="Global Partners" data-ko="글로벌 파트너">Global Partners</p>
+                    <p class="contact-item-value">UK · Germany · USA</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Q-Bit Corporation. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // ═══════════════════════════════════════
+        // Language Toggle
+        // ═══════════════════════════════════════
+        let currentLang = 'en';
+
+        function toggleLang() {
+            currentLang = currentLang === 'en' ? 'ko' : 'en';
+            const btn = document.querySelector('.lang-toggle');
+            btn.textContent = currentLang === 'en' ? '한국어' : 'English';
+            document.documentElement.lang = currentLang;
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    if (el.tagName === 'A' && el.querySelector('span')) {
+                        el.querySelector('span').textContent = text;
+                    } else {
+                        el.innerHTML = text;
+                    }
+                }
+            });
+        }
+
+        // ═══════════════════════════════════════
+        // Scroll Reveal
+        // ═══════════════════════════════════════
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ═══════════════════════════════════════
+        // Wave Canvas Animation
+        // ═══════════════════════════════════════
+        const canvas = document.getElementById('waveCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = 800 * dpr;
+            canvas.height = 200 * dpr;
+            canvas.style.width = '100%';
+            canvas.style.maxWidth = '800px';
+            canvas.style.height = '200px';
+            ctx.scale(dpr, dpr);
+
+            let time = 0;
+
+            function drawWave() {
+                ctx.clearRect(0, 0, 800, 200);
+
+                // Wave 1 - primary
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.lineWidth = 1.5;
+                for (let x = 0; x < 800; x++) {
+                    const y = 100 + Math.sin(x * 0.008 + time * 0.02) * 40
+                                  + Math.sin(x * 0.015 + time * 0.035) * 20;
+                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // Wave 2 - interference
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(0, 113, 227, 0.4)';
+                ctx.lineWidth = 1.5;
+                for (let x = 0; x < 800; x++) {
+                    const y = 100 + Math.sin(x * 0.012 - time * 0.025) * 30
+                                  + Math.cos(x * 0.006 + time * 0.015) * 25;
+                    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // Interference pattern (dots at crossings)
+                for (let x = 0; x < 800; x += 4) {
+                    const y1 = 100 + Math.sin(x * 0.008 + time * 0.02) * 40
+                                   + Math.sin(x * 0.015 + time * 0.035) * 20;
+                    const y2 = 100 + Math.sin(x * 0.012 - time * 0.025) * 30
+                                   + Math.cos(x * 0.006 + time * 0.015) * 25;
+                    const diff = Math.abs(y1 - y2);
+                    if (diff < 8) {
+                        const alpha = (1 - diff / 8) * 0.6;
+                        ctx.fillStyle = `rgba(0, 113, 227, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.arc(x, (y1 + y2) / 2, 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                time++;
+                requestAnimationFrame(drawWave);
+            }
+
+            // Start animation when visible
+            const waveObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    drawWave();
+                    waveObserver.disconnect();
+                }
+            });
+            waveObserver.observe(canvas);
+        }
+
+        // ═══════════════════════════════════════
+        // Smooth scroll for nav links
+        // ═══════════════════════════════════════
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
