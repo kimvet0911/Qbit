@@ -128,6 +128,18 @@
         .pillar-card h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--black); margin-bottom: 12px; }
         .pillar-card p { font-size: 15px; font-weight: 300; color: var(--gray-600); line-height: 1.6; }
 
+        .products { padding: 80px 24px 120px; background: var(--white); }
+        .products-inner { max-width: 720px; margin: 0 auto; }
+        .product-card {
+            background: var(--gray-50); border-radius: 24px; padding: 48px 40px;
+            border: 1px solid var(--gray-200);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+        .product-card h3 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; color: var(--black); margin-bottom: 12px; }
+        .product-card p { font-size: 17px; font-weight: 300; color: var(--gray-600); line-height: 1.6; margin-bottom: 24px; }
+        .product-cta { opacity: 1; animation: none; }
+
         .team { padding: 140px 24px; background: var(--gray-50); }
         .team-content { max-width: 720px; margin: 0 auto; text-align: center; }
         .team h2 { font-size: clamp(32px, 5vw, 48px); font-weight: 700; letter-spacing: -0.03em; color: var(--black); margin-bottom: 56px; }
@@ -185,6 +197,7 @@
             <a href="#" class="nav-logo">Q-Bit<span> Corp.</span></a>
             <div class="nav-links">
                 <a href="#about" class="nav-text" data-en="About" data-ko="소개">About</a>
+                <a href="#products" class="nav-text" data-en="Products" data-ko="제품">Products</a>
                 <a href="#team" class="nav-text" data-en="Team" data-ko="팀">Team</a>
                 <a href="#contact" class="nav-text" data-en="Contact" data-ko="문의">Contact</a>
                 <button class="lang-toggle" onclick="toggleLang()">한국어</button>
@@ -258,6 +271,23 @@
                 <h3 data-en="Human-Centered Design" data-ko="사람 중심 설계">Human-Centered Design</h3>
                 <p data-en="The most sophisticated analysis is worthless if it can't be used. We build systems that surface insight in forms people can act on — privately, securely, on-premise."
                    data-ko="활용할 수 없는 정교한 분석은 의미가 없습니다. 사람이 실제로 행동할 수 있는 형태로 인사이트를 제공하는 시스템 — 안전하고, 독립적으로.">The most sophisticated analysis is worthless if it can't be used. We build systems that surface insight in forms people can act on — privately, securely, on-premise.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="products" id="products">
+        <div class="products-inner">
+            <p class="section-label" data-en="Products" data-ko="제품">Products</p>
+            <div class="product-card">
+                <h3>spatialκappa</h3>
+                <p data-en="Spatial transcriptomics analysis service — core cell-type and DEG reports, with an optional κ transition module for spatial instability and phase-transition geometry."
+                   data-ko="공간 전사체 분석 서비스 — 세포 유형·DEG 코어 리포트와, 공간 불안정성·상전이 기하학을 위한 κ 모듈(선택)을 제공합니다.">Spatial transcriptomics analysis service — core cell-type and DEG reports, with an optional κ transition module for spatial instability and phase-transition geometry.</p>
+                <a href="https://spatialkappa.q-bit.ai.kr" class="hero-cta product-cta" data-en="View spatialkappa" data-ko="spatialkappa 보기">
+                    <span>View spatialkappa</span>
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 10h8M11 7l3 3-3 3"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
