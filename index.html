@@ -136,9 +136,39 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
         .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
-        .product-card h3 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; color: var(--black); margin-bottom: 12px; }
+        .product-card + .product-card { margin-top: 20px; }
+        .product-card h3 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; color: var(--black); margin-bottom: 8px; }
+        .product-slogan { font-size: 14px; font-weight: 500; letter-spacing: 0.01em; color: var(--blue); margin-bottom: 16px; }
         .product-card p { font-size: 17px; font-weight: 300; color: var(--gray-600); line-height: 1.6; margin-bottom: 24px; }
         .product-cta { opacity: 1; animation: none; }
+        .product-card.clickable { cursor: pointer; }
+        .product-detail-hint {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 15px; font-weight: 400; color: var(--blue); margin-bottom: 0;
+        }
+        .product-detail-hint svg { width: 18px; height: 18px; transition: transform 0.3s; }
+        .product-card.clickable:hover .product-detail-hint svg { transform: scale(1.12); }
+
+        .img-modal {
+            position: fixed; inset: 0; z-index: 2000;
+            background: rgba(0,0,0,0.82); backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center; padding: 40px 24px;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .img-modal.open { opacity: 1; visibility: visible; }
+        .img-modal img {
+            max-width: min(1100px, 96vw); max-height: 90vh;
+            border-radius: 12px; box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+            transform: scale(0.96); transition: transform 0.3s ease;
+        }
+        .img-modal.open img { transform: scale(1); }
+        .img-modal-close {
+            position: absolute; top: 20px; right: 24px;
+            width: 40px; height: 40px; border-radius: 980px; border: none;
+            background: rgba(255,255,255,0.14); color: var(--white);
+            font-size: 22px; line-height: 1; cursor: pointer; transition: background 0.3s;
+        }
+        .img-modal-close:hover { background: rgba(255,255,255,0.28); }
 
         .team { padding: 140px 24px; background: var(--gray-50); }
         .team-content { max-width: 720px; margin: 0 auto; text-align: center; }
@@ -278,8 +308,36 @@
     <section class="products" id="products">
         <div class="products-inner">
             <p class="section-label" data-en="Products" data-ko="제품">Products</p>
+            <div class="product-card clickable" onclick="openImgModal('assets/products/qbit-runtime.png')">
+                <h3>Q-Bit Runtime™</h3>
+                <p class="product-slogan" data-en="One Runtime. Any Model. Any Workload."
+                   data-ko="하나의 런타임. 모든 모델. 모든 워크로드.">One Runtime. Any Model. Any Workload.</p>
+                <p data-en="A model-agnostic operating system that runs, observes, controls, and verifies AI execution across any model and any workload — from 8B to 400B, on-premise and secure."
+                   data-ko="모델에 종속되지 않는 AI 운영체제. 어떤 모델·어떤 워크로드에서도 AI 실행을 실행·관찰·제어·검증합니다 — 8B부터 400B까지, 온프레미스로 안전하게.">A model-agnostic operating system that runs, observes, controls, and verifies AI execution across any model and any workload — from 8B to 400B, on-premise and secure.</p>
+                <span class="product-detail-hint">
+                    <span data-en="View detail" data-ko="상세 보기">View detail</span>
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 10h8M11 7l3 3-3 3"/>
+                    </svg>
+                </span>
+            </div>
+            <div class="product-card clickable" onclick="openImgModal('assets/products/qbit-llm-observatory.png')">
+                <h3>Q-Bit LLM Observatory™</h3>
+                <p class="product-slogan" data-en="Observe · Understand · Control"
+                   data-ko="관찰 · 이해 · 제어">Observe · Understand · Control</p>
+                <p data-en="A next-generation AI observability platform that continuously measures and visualizes the internal computational states of LLMs, detects failure causes early, and optimizes agent execution."
+                   data-ko="차세대 AI 관측 플랫폼. LLM의 내부 계산 상태를 지속적으로 측정·시각화하고, 실패 원인을 조기에 탐지하며, 에이전트 실행을 최적화합니다.">A next-generation AI observability platform that continuously measures and visualizes the internal computational states of LLMs, detects failure causes early, and optimizes agent execution.</p>
+                <span class="product-detail-hint">
+                    <span data-en="View detail" data-ko="상세 보기">View detail</span>
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M6 10h8M11 7l3 3-3 3"/>
+                    </svg>
+                </span>
+            </div>
             <div class="product-card">
                 <h3>spatialκappa</h3>
+                <p class="product-slogan" data-en="Spatial transcriptomics, decoded."
+                   data-ko="공간 전사체, 해독하다.">Spatial transcriptomics, decoded.</p>
                 <p data-en="Spatial transcriptomics analysis service — core cell-type and DEG reports, with an optional κ transition module for spatial instability and phase-transition geometry."
                    data-ko="공간 전사체 분석 서비스 — 세포 유형·DEG 코어 리포트와, 공간 불안정성·상전이 기하학을 위한 κ 모듈(선택)을 제공합니다.">Spatial transcriptomics analysis service — core cell-type and DEG reports, with an optional κ transition module for spatial instability and phase-transition geometry.</p>
                 <a href="https://spatialkappa.q-bit.ai.kr" class="hero-cta product-cta" data-en="View spatialkappa" data-ko="spatialkappa 보기">
@@ -332,6 +390,11 @@
         <p>© 2025 Q-Bit Corporation. All rights reserved.</p>
     </footer>
 
+    <div class="img-modal" id="imgModal" onclick="closeImgModal(event)">
+        <button class="img-modal-close" onclick="closeImgModal(event)" aria-label="Close">&times;</button>
+        <img id="imgModalImg" src="" alt="Product detail">
+    </div>
+
     <script>
         // Language Toggle
         let currentLang = 'en';
@@ -349,6 +412,22 @@
                 }
             });
         }
+
+        // Product detail image modal
+        function openImgModal(src) {
+            const modal = document.getElementById('imgModal');
+            document.getElementById('imgModalImg').src = src;
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeImgModal(e) {
+            if (e && e.target.tagName === 'IMG') return;
+            document.getElementById('imgModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeImgModal();
+        });
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
